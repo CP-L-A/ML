@@ -21,15 +21,20 @@ def Tree(data,label):
     end = time.perf_counter()
     print("运行时间:"+str(end-start)+"秒")
     return tree
+def test_load(iris):
+    train_data,test_data,train_label,test_label=train_test_split(iris.data,iris.target,test_size=0.4)
+    return test_data,test_label
 #保存树文件
 def save_tree(tree):
     joblib.dump(tree,'save/Tree.pkl')
 if __name__=='__main__':
     x,y,iris=data_load()
-    train_data,test_data=train_test_split(x,test_size=0.4,random_state=42)
-    train_label,test_label=train_test_split(y,test_size=0.4,random_state=42)
-    tree_classify=Tree(train_data,train_label)
-    predict_label=tree_classify.predict(test_data)
-    save_tree(tree_classify)
+    y_train=(y==2)
+    test_data,test_label=test_load(iris)
+    test_label=(test_label==2)
+    tree_classify=Tree(x,y_train)
+    pred=tree_classify.predict(test_data)
     plot_tree(tree_classify)
+    recall=recall_score(test_label,pred)
+    print(recall)
     plt.show()
