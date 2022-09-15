@@ -1,4 +1,5 @@
 #梯度提升树的sk实现
+#建立梯度提升回归树拟合线性模型
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
@@ -6,7 +7,7 @@ from sklearn.metrics import mean_squared_error
 def load_data():
     np.random.seed(0)
     x=np.random.rand(200,1)
-    y=4+3*pow(x,3)+np.random.rand(200,1)
+    y=4+3*x+np.random.rand(200,1)
     x1=x[:150,:]
     x2=x[150:200,:]
     y1=y[:150,:]
