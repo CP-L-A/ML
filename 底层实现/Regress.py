@@ -28,12 +28,19 @@ def Regress_train(x,y):
     else:
         w=xTx.I*(xMat.T*yMat)
     return w
+def cale_MSE(y_true,y_pred):
+    error=y_true-y_pred
+    MSE=error.T*error
+    print(error)
+    return float(MSE)
 #主函数
 if __name__=='__main__':
     x_train,y_train,x_test,y_test=load_data()
     w=Regress_train(x_train,y_train)                    #训练模型
     xMat=x_append_1(x_test)                             #进行预测
     y_pred=w.T*xMat.T
+    MSE=cale_MSE(y_test,y_pred.T)
+    print(MSE)
     plt.scatter(x_test.tolist(),y_test.tolist())        #绘制示意图
     plt.plot(x_test.tolist(),y_pred.T.tolist(),color='red')
     plt.show()
