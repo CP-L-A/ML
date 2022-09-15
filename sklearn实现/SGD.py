@@ -1,3 +1,4 @@
+#随机梯度下降的sk实现
 import os
 import struct
 import numpy as np

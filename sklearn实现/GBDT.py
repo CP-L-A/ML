@@ -1,3 +1,4 @@
+#梯度提升树的sk实现
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
