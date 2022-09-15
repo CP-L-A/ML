@@ -1,29 +1,30 @@
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-import time
+import matplotlib.pyplot as plt
 import numpy as np
-def data_load():
-    iris=load_iris()
-    train_data,test_data,train_label,test_label=train_test_split(iris.data,iris.target,
-                                                                 test_size=0.4,
-                                                                 random_state=42)
-
-    return train_data,train_label,test_data,test_label
-
-def GBDT(data,label,num=20,depth=1):
-    gradTree=GradientBoostingClassifier(n_estimators=num,
-                                        learning_rate=1.0,
-                                        max_depth=depth,
-                                        random_state=42)
-    gradTree.fit(data,label)
-    return gradTree
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error
+def load_data():
+    np.random.seed(0)
+    x=np.random.rand(200,1)
+    y=4+3*x+np.random.rand(200,1)
+    x1=x[:150,:]
+    x2=x[150:200,:]
+    y1=y[:150,:]
+    y2=y[150:200,:]
+    return x1,y1,x2,y2
+def GBDT_Train(x,y):
+    reg_tree=GradientBoostingRegressor(n_estimators=100,max_depth=1)
+    reg_tree.fit(x,y)
+    return reg_tree
 if __name__=='__main__':
-    datamat,labelmat,testdata,testlabel=data_load()
-    start=time.perf_counter()
-    Tree=GBDT(datamat,labelmat,100)
-    end=time.perf_counter()
-    print('运行时间:'+str(end-start))
-    result=Tree.predict(testdata)
-    print(result)
-    print(testlabel)
+    x_train,y_train,x_test,y_test=load_data()
+    tree=GBDT_Train(x_train,y_train)
+    y_pred=tree.predict(x_test)
+    y_prec=tree.predict(x_train)
+    mean_error_1=mean_squared_error(y_train,y_prec)
+    mean_error_2=mean_squared_error(y_test,y_pred)
+    plt.scatter(x_test,y_test,color='blue')
+    plt.scatter(x_test,y_pred,color='red')
+    plt.show()
+    print(mean_error_1,mean_error_2)
+
+
