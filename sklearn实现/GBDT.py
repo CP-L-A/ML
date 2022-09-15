@@ -22,9 +22,11 @@ if __name__=='__main__':
     tree=GBDT_Train(x_train,y_train)
     y_pred=tree.predict(x_test)
     y_prec=tree.predict(x_train)
+    #计算均方误差
     mean_error_1=mean_squared_error(y_train,y_prec)
     mean_error_2=mean_squared_error(y_test,y_pred)
     print(mean_error_1, mean_error_2)
+    #绘制示意图
     plt.scatter(x_test,y_test,color='blue')
     plt.scatter(x_test,y_pred,color='red')
     plt.show()
