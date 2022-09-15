@@ -5,6 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 import joblib
+MOD_load=True
+def load_model():
+    MOD=joblib.load('save/SVM.pkl')
+    return MOD
 def load_data():
     iris=load_iris()
     x=iris.data
@@ -21,9 +25,12 @@ def save_mod(MOD):
     joblib.dump(MOD,'save/SVM.pkl')
 if __name__=='__main__':
     train_data,train_label,test_data,test_label=load_data()
-    SVM_MOD=SVM_Train(train_data,train_label)
+    if MOD_load:
+        SVM_MOD=load_model()
+    else:
+        SVM_MOD=SVM_Train(train_data,train_label)
+        save_mod(SVM_MOD)
     y_pred=SVM_MOD.predict(test_data)
-    save_mod(SVM_MOD)
     score=recall_score(test_label,y_pred)
     print(score)
     print(SVM_MOD.coef_)
