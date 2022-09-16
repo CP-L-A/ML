@@ -17,14 +17,20 @@ def load_data():
     return x1, y1, x2, y2
 if __name__=='__main__':
     x_train,y_train,x_test,y_test=load_data()
-    #训练线性回归模型
+    #基于最小二乘训练线性回归模型
     linear_mod=LinearRegression()
     linear_mod.fit(x_train,y_train)
-    y_pred=linear_mod.predict(x_train)
-    y_predict=linear_mod.predict(x_test)
-    MSE_1=mean_squared_error(y_train,y_pred)
-    MSE_2=mean_squared_error(y_test,y_predict)
-    print(MSE_1,MSE_2)
+    y_pred_1=linear_mod.predict(x_test)
+    MSE_1=mean_squared_error(y_test,y_pred_1)
+    print(MSE_1)
+    #基于梯度下降训练线性回归模型
+    SGD_MOD=SGDRegressor(random_state=42)
+    SGD_MOD.fit(x_train,y_train)
+    y_pred_2=SGD_MOD.predict(x_test)
+    MSE_2=mean_squared_error(y_test,y_pred_2)
+    print(MSE_2)
+    #绘制示意图
+    fig=plt.figure()
     plt.scatter(x_test,y_test,color='red')
-    plt.plot(x_test,y_predict)
+    plt.plot(x_test,y_pred_1)
     plt.show()

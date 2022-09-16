@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e9a5532-e688-4cba-aa87-67dbc2d3c01d" name="变更" comment="Regress程序计算了MSE">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Regress.py" beforeDir="false" afterPath="$PROJECT_DIR$/Regress.py" afterDir="false" />
+    <list default="true" id="3e9a5532-e688-4cba-aa87-67dbc2d3c01d" name="变更" comment="更正了MSE的计算">
+      <change beforePath="$PROJECT_DIR$/../sklearn实现/regress.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sklearn实现/regress.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663247009468</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="更正了MSE的计算">
+      <created>1663303826814</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663303826814</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -80,6 +86,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加了线性回归的基于numpy的实现" />
     <MESSAGE value="Regress程序计算了MSE" />
-    <option name="LAST_COMMIT_MESSAGE" value="Regress程序计算了MSE" />
+    <MESSAGE value="更正了MSE的计算" />
+    <option name="LAST_COMMIT_MESSAGE" value="更正了MSE的计算" />
   </component>
 </project>
