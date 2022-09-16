@@ -31,8 +31,7 @@ def Regress_train(x,y):
 def cale_MSE(y_true,y_pred):
     error=y_true-y_pred
     MSE=error.T*error
-    print(error)
-    return float(MSE)
+    return float(MSE)/len(error)
 #主函数
 if __name__=='__main__':
     x_train,y_train,x_test,y_test=load_data()
