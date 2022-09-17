@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 def load_data():
     np.random.seed(0)
     x = np.random.rand(200, 1)
-    y = 4 + 3 * x + np.random.rand(200, 1)
+    y = 4 + 3 * x+np.random.rand(200,1)
     x1 = x[:150, :]
     x2 = x[150:200, :]
     y1 = y[:150, :]

@@ -1,11 +1,14 @@
 #PCA降维
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
+from matplotlib import animation
+from sklearn.linear_model import LinearRegression
 import numpy as np
 #随机生成50x3的数据集
 def load_data():
     #固定随机数种子，保证运行每次结果都相同
     np.random.seed(0)
-    datamat=np.random.rand(30,2)
+    datamat=np.random.rand(50,3)
     return np.mat(datamat)
 def PCA(datamat,k=None):
     if k==None:                                   #如果未指定k则返回原数据
@@ -21,27 +24,31 @@ def PCA(datamat,k=None):
     lowD_Data=mean_removed_data*matV              #计算降维以后的数据矩阵
     reconData=lowD_Data*matV.T+meanmat            #将数据转化到N个特征向量的新空间
     return lowD_Data,reconData
-'''def PCA_fig(datamat):                             #PCA过程可视化，选取方差较大的两个变量，在二维平面上进行展示
-    lowD_Data, sorted_eigVal,mean_removed=PCA(datamat,2)
-    main_data=mean_removed[:,sorted_eigVal]
-    x=np.array(main_data[:,0])
-    y=np.array(main_data[:,1])
-    #坐标轴居中
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
-    ax.spines['top'].set_color('none')            #隐藏多余的坐标轴
-    ax.spines['right'].set_color('none')
-    ax.xaxis.set_ticks_position('bottom')         #用bottom代替x轴，left代替y轴
-    ax.spines['bottom'].set_position(('data', 0))
-    ax.yaxis.set_ticks_position('left')
-    ax.spines['left'].set_position(('data', 0))
-    #绘制去中心化以后数据的散点图
-    plt.scatter(x,y)
-    plt.show()'''
+#线性回归，拟合降维之后的平面
+def pic(data):
+    train_data=data[:,:2]
+    train_z=data[:,-1]
+    liner_mod=LinearRegression()
+    liner_mod.fit(train_data,train_z)
+    return liner_mod
 if __name__=='__main__':
     data=load_data()
-    lowD_Data,reconData=PCA(data,1)
-    plt.scatter(np.array(data[:, 0]), np.array(data[:, 1]), color='blue')
-    plt.plot(np.array(reconData[:,0]),np.array(reconData[:,1]),color='red')
+    lowD_Data,reconData=PCA(data,2)
+    #设置绘制三维图
+    fig=plt.figure()
+    ax=plt.axes(projection='3d')
+    #原始数据的散点图
+    ax.scatter3D(np.array(data[:,0]),np.array(data[:,1]),np.array(data[:,2]),color='blue')
+    #绘制平面
+    linear= pic(reconData)
+    w=linear.coef_.tolist()
+    w0=linear.intercept_
+    x=np.linspace(-0.1,1,10)
+    y=np.linspace(-0.1,1,10)
+    xx,yy=np.meshgrid(x,y)
+    zz=float(w0)+float(w[0][0])*xx+float(w[0][1])*yy
+    #ax.plot_wireframe(xx,yy,zz,color='red')
+    ax.plot_surface(xx, yy, zz, color='skyblue',alpha=0.3)
+    #绘制降维以后的数据点
+    ax.scatter3D(np.array(reconData[:,0]), np.array(reconData[:,1]), np.array(reconData[:,2]), color='red')
     plt.show()
-    print(reconData)
