@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e9a5532-e688-4cba-aa87-67dbc2d3c01d" name="变更" comment="添加了PCA的numpy实现">
-      <change beforePath="$PROJECT_DIR$/../sklearn实现/regress.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sklearn实现/regress.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/K-means.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sklearn实现/PCA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sklearn实现/PCA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCA.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCA.py" afterDir="false" />
     </list>
@@ -37,8 +38,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/LCP/Desktop/统计学习实现/sklearn实现",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "last_opened_file_path": "C:/Users/LCP/Desktop/统计学习实现/sklearn实现/PCA.py",
+    "settings.editor.selected.configurable": "diff.base"
   }
 }]]></component>
   <component name="RunManager">

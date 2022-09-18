@@ -7,7 +7,7 @@ import numpy as np
 #随机生成50x3的数据集
 def load_data():
     #固定随机数种子，保证运行每次结果都相同
-    np.random.seed(0)
+    np.random.seed(42)
     datamat=np.random.rand(50,3)
     return np.mat(datamat)
 def PCA(datamat,k=None):
@@ -51,4 +51,9 @@ if __name__=='__main__':
     ax.plot_surface(xx, yy, zz, color='skyblue',alpha=0.3)
     #绘制降维以后的数据点
     ax.scatter3D(np.array(reconData[:,0]), np.array(reconData[:,1]), np.array(reconData[:,2]), color='red')
+    #将降维以后的数据点和原数据连接起来
+    for i in range(len(data)):
+        ax.plot([np.array(data[i,0]),np.array(reconData[i,0])],
+                [np.array(data[i,1]),np.array(reconData[i,1])],
+                [np.array(data[i,2]),np.array(reconData[i,2])],color='red')
     plt.show()
