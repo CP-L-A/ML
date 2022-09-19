@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e9a5532-e688-4cba-aa87-67dbc2d3c01d" name="变更" comment="添加了PCA的numpy实现">
-      <change afterPath="$PROJECT_DIR$/K-means.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sklearn实现/PCA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sklearn实现/PCA.py" afterDir="false" />
+    <list default="true" id="3e9a5532-e688-4cba-aa87-67dbc2d3c01d" name="变更" comment="SK的PCA增加了绘制示意图">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/K-means.py" beforeDir="false" afterPath="$PROJECT_DIR$/K-means.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCA.py" beforeDir="false" afterPath="$PROJECT_DIR$/PCA.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/LCP/Desktop/统计学习实现/sklearn实现/PCA.py",
+    "last_opened_file_path": "C:/Users/LCP/Desktop/统计学习实现/sklearn实现",
     "settings.editor.selected.configurable": "diff.base"
   }
 }]]></component>
@@ -114,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663396117012</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="SK的PCA增加了绘制示意图">
+      <created>1663467473234</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663467473234</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,6 +139,7 @@
     <MESSAGE value="Regress程序计算了MSE" />
     <MESSAGE value="更正了MSE的计算" />
     <MESSAGE value="添加了PCA的numpy实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了PCA的numpy实现" />
+    <MESSAGE value="SK的PCA增加了绘制示意图" />
+    <option name="LAST_COMMIT_MESSAGE" value="SK的PCA增加了绘制示意图" />
   </component>
 </project>

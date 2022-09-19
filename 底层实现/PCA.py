@@ -4,6 +4,7 @@ from mpl_toolkits import mplot3d
 from matplotlib import animation
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import time
 #随机生成50x3的数据集
 def load_data():
     #固定随机数种子，保证运行每次结果都相同
@@ -34,26 +35,34 @@ def pic(data):
 if __name__=='__main__':
     data=load_data()
     lowD_Data,reconData=PCA(data,2)
-    #设置绘制三维图
-    fig=plt.figure()
-    ax=plt.axes(projection='3d')
-    #原始数据的散点图
-    ax.scatter3D(np.array(data[:,0]),np.array(data[:,1]),np.array(data[:,2]),color='blue')
-    #绘制平面
+    #计算降维后数据所在的平面
     linear= pic(reconData)
     w=linear.coef_.tolist()
     w0=linear.intercept_
-    x=np.linspace(-0.1,1,10)
-    y=np.linspace(-0.1,1,10)
+    x=np.linspace(0,1,5)
+    y=np.linspace(0,1,5)
     xx,yy=np.meshgrid(x,y)
-    zz=float(w0)+float(w[0][0])*xx+float(w[0][1])*yy
-    #ax.plot_wireframe(xx,yy,zz,color='red')
-    ax.plot_surface(xx, yy, zz, color='skyblue',alpha=0.3)
-    #绘制降维以后的数据点
-    ax.scatter3D(np.array(reconData[:,0]), np.array(reconData[:,1]), np.array(reconData[:,2]), color='red')
-    #将降维以后的数据点和原数据连接起来
+    zz = float(w0) + float(w[0][0]) * xx + float(w[0][1]) * yy
+    # 设置绘制三维图
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
+    ax.set_xlim(0,1)
+    ax.set_ylim(0,1)
+    ax.set_zlim(-1,2)
+    plt.ion()
+    # 原始数据的散点图
+    ax.scatter3D(data[:, 0],data[:, 1], data[:,2], color='blue')
+    plt.pause(1)
+    # 绘制平面
+    ax.plot_surface(xx, yy, zz, color='green', alpha=0.3)
+    plt.pause(2)
+    # 将降维以后的数据点和原数据连接起来
     for i in range(len(data)):
-        ax.plot([np.array(data[i,0]),np.array(reconData[i,0])],
-                [np.array(data[i,1]),np.array(reconData[i,1])],
-                [np.array(data[i,2]),np.array(reconData[i,2])],color='red')
-    plt.show()
+        ax.plot([np.array(data[i, 0]), np.array(reconData[i, 0])],
+                [np.array(data[i, 1]), np.array(reconData[i, 1])],
+                [np.array(data[i, 2]), np.array(reconData[i, 2])], color='red')
+    #plt.pause(0.5)
+    # 绘制降维以后的数据点
+    ax.scatter3D(np.array(reconData[:, 0]), np.array(reconData[:, 1]), np.array(reconData[:, 2]), color='red')
+    plt.pause(2)
+    plt.ioff()

@@ -7,12 +7,13 @@ from sklearn.metrics import mean_squared_error
 def load_data():
     np.random.seed(0)
     x=np.random.rand(200,1)
-    y=4+3*x+np.random.rand(200,1)
+    y=4+3*x*x+np.random.rand(200,1)
     x1=x[:150,:]
     x2=x[150:200,:]
     y1=y[:150,:]
     y2=y[150:200,:]
-    return x1,y1,x2,y2
+    return x1, np.array(y1.T.tolist()[0]), x2, np.array(y2.T.tolist()[0])
+#GBDT的训练过程
 def GBDT_Train(x,y):
     reg_tree=GradientBoostingRegressor(n_estimators=150,max_depth=1)
     reg_tree.fit(x,y)
@@ -23,13 +24,10 @@ if __name__=='__main__':
     y_pred=tree.predict(x_test)
     y_prec=tree.predict(x_train)
     #计算均方误差
-    mean_error_1=mean_squared_error(y_train,y_prec)
-    mean_error_2=mean_squared_error(y_test,y_pred)
-    print(mean_error_1, mean_error_2)
-    #绘制示意图
-    plt.scatter(x_test,y_test,color='blue')
-    plt.scatter(x_test,y_pred,color='red')
-    plt.show()
+    mean_error_1=mean_squared_error(y_train,y_prec)         #训练集上的均方误差
+    mean_error_2=mean_squared_error(y_test,y_pred)          #测试集的均方误差
+    print('训练集均方误差：%f,测试集均方误差：%f'%(mean_error_1, mean_error_2))
+
 
 
 
