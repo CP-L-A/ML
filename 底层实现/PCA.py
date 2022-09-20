@@ -1,7 +1,7 @@
 #PCA降维
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
-from matplotlib import animation
+import matplotlib.animation as anim
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import time
@@ -52,7 +52,7 @@ if __name__=='__main__':
     plt.ion()
     # 原始数据的散点图
     ax.scatter3D(data[:, 0],data[:, 1], data[:,2], color='blue')
-    plt.pause(1)
+    plt.pause(12)
     # 绘制平面
     ax.plot_surface(xx, yy, zz, color='green', alpha=0.3)
     plt.pause(2)
@@ -60,9 +60,9 @@ if __name__=='__main__':
     for i in range(len(data)):
         ax.plot([np.array(data[i, 0]), np.array(reconData[i, 0])],
                 [np.array(data[i, 1]), np.array(reconData[i, 1])],
-                [np.array(data[i, 2]), np.array(reconData[i, 2])], color='red')
-    #plt.pause(0.5)
+                [np.array(data[i, 2]), np.array(reconData[i, 2])], color='black',linewidth=0.5)
+    plt.pause(0.1)
     # 绘制降维以后的数据点
     ax.scatter3D(np.array(reconData[:, 0]), np.array(reconData[:, 1]), np.array(reconData[:, 2]), color='red')
-    plt.pause(2)
+    plt.pause(30)
     plt.ioff()

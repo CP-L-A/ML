@@ -38,7 +38,7 @@ def PCA_Train(data,k):
     return lowD_Data
 #SVM训练过程
 def SVM_Train(x,y):
-    model=svm.SVC(kernel='rbf',C=0.1)                    #核函数采用rbf
+    model=svm.SVC(kernel='rbf',C=0.1)                    #核函数采用rbf,参数C用于防止过拟合
     model.fit(x,y)
     return model
 #保存SVM模型
@@ -53,12 +53,14 @@ if __name__=='__main__':
     else:
         SVM_MOD=SVM_Train(lowd_data,label)
         #save_mod(SVM_MOD)
-    #在训练集上进行测试
+    #在测试集上进行测试
     lowd_test=PCA_Train(test_d,k)
     pred_label=SVM_MOD.predict(lowd_test)
     #计算精度和召回率
+    #训练集上的精度
     train_precision=precision_score(label,SVM_MOD.predict(lowd_data))
     print(train_precision)
+    #测试集上的精度与召回率，以及F值
     precision=precision_score(test_l,pred_label)
     recall=recall_score(test_l,pred_label)
     f1=f1_score(test_l,pred_label)
