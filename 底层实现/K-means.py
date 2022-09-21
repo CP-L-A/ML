@@ -23,6 +23,7 @@ def randCent(dataSet,k):
         centroids[:,j]=minJ+rangJ*np.random.rand(k,1)
     return centroids
 #K均值训练过程
+#返回各个簇的质心坐标与划分结果矩阵
 def K_means(dataSet,k):
     m=np.shape(dataSet)[0]
     clusterAssment=np.mat(np.zeros((m,2)))                #构造矩阵用于存放分类结果以及误差
@@ -47,11 +48,50 @@ def K_means(dataSet,k):
         #计算特征的平均值，作为新的质心
         for cent in range(k):
             ptsInclust=dataSet[np.nonzero(clusterAssment[:,0].A==cent)[0]]
-            centroids[cent,:]=np.mean(ptsInclust,axis=0)
+            centroids[cent,:]=np.mean(ptsInclust,axis=0)   #对每一行求平均值
         item+=1
     return centroids,clusterAssment
+#二分K均值算法
+def Bin_K_means(datamat,k=2):
+    global bewtNewCents, bestCentTosplit, bestClutsAss
+    if k<=1:
+        return
+    m=np.shape(datamat)[0]
+    clusterAssment=np.mat(np.zeros((m,2)))                 #用于存放聚类信息的矩阵
+    centroid0=np.mean(datamat,axis=0)                      #计算初始的质心坐标
+    centerList=[centroid0.tolist()]                                 #存放质心的坐标
+    for i in range(m):
+        clusterAssment[i,1]=calcEculd(centroid0,datamat[i,:])**2      #计算每个数据到初始质心的距离
+    while (len(centerList)<k):
+        lowestSSE=float('inf')
+        for i in range(len(centerList)):                   #对于第i个质心
+            #提取出划分到第i个质心的数据
+            ptsInCurrCluster=datamat[np.nonzero(clusterAssment[:,0].A==i)[0],:]
+            #对这些数据进行二次划分
+            Newcenter,splitClustAss=K_means(ptsInCurrCluster,2)
+            #计算二次划分部分划分以后的偏差
+            seeSplit=np.sum(splitClustAss[:,1])
+            #计算未划分的偏差
+            seeNotSplit=np.sum(clusterAssment[np.nonzero(clusterAssment[:,0]!=i)[0],1])
+            #比较划分前后的总误差,如果划分后的误差更小则更新数据
+            if(seeSplit+seeNotSplit)<lowestSSE:
+                bestCentTosplit=i
+                bewtNewCents=Newcenter
+                bestClutsAss=splitClustAss.copy()
+                lowestSSE=seeSplit+seeNotSplit
+            #更新划分结果,此次二次划分的得到1类簇归类为最后一类
+            bestClutsAss[np.nonzero(bestClutsAss[:,0].A==1)[0],0]=len(centerList)
+            #此次二次划分的0类数据归类为划分之前的类
+            bestClutsAss[np.nonzero(bestClutsAss[:,0].A==0)[0],0]=bestCentTosplit
+            #划分之前的类质心数据更新为二次划分以后的第一个质心
+            centerList[bestCentTosplit]=bewtNewCents[0,:]
+            #插入二次划分以后新的质心
+            centerList.append(bewtNewCents[1,:])
+            #更新clusterAssment中的数据
+            clusterAssment[np.nonzero(clusterAssment[:,0].A==bestCentTosplit)[0],:]=bestClutsAss
+    return centerList,clusterAssment
+
 if __name__=='__main__':
     data,label=load_data()
-    orids,Assment=K_means(data,3)
+    orids,Assment=Bin_K_means(data,3)
     print(orids)
-

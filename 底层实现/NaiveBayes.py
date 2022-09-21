@@ -49,9 +49,7 @@ class Bayes:
         return retModel
     #预测函数，对于每个测试数据，进行预测
     def predict(self,data):
-        print(data)
         datamat=pd.DataFrame(data)
-        print('测试数据转化:\n',datamat,'\n')
         label_pred=[]
         for i in range(len(data)):
             label_pred.append(self.predictBayes(datamat.iloc[i]))
