@@ -1,5 +1,6 @@
 #基于sklearn的SVM分类器实现实现
 #采用sklearn自带的乳腺癌数据集
+#基于PCA进行降维
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import svm
