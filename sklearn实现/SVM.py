@@ -12,7 +12,7 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 import joblib
 #标志变量：决定调用已有模型或新的模型
-MOD_load=False
+MOD_load=True
 def load_model():
     MOD=joblib.load('save/SVM.pkl')
     return MOD
@@ -53,7 +53,7 @@ if __name__=='__main__':
         SVM_MOD=load_model()
     else:
         SVM_MOD=SVM_Train(lowd_data,label)
-        #save_mod(SVM_MOD)
+        save_mod(SVM_MOD)
     #在测试集上进行测试
     lowd_test=PCA_Train(test_d,k)
     pred_label=SVM_MOD.predict(lowd_test)
