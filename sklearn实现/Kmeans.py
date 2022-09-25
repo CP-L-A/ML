@@ -8,6 +8,7 @@ from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
 from sklearn import pipeline
 from nyoka import skl_to_pmml
+
 #加载数据集
 def load_data():
     data,label=load_iris(return_X_y=True)
@@ -38,7 +39,6 @@ if __name__=='__main__':
                             ('PCA',PCA(n_components=k)),
                             ('Kmean',KMeans(n_clusters=3))])
     Pipe.fit(data)
-    joblib.dump(Pipe,'save/Kmeans.pkl')
 
 
 
